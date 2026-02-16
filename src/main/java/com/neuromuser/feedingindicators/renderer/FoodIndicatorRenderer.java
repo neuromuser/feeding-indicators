@@ -60,8 +60,7 @@ public class FoodIndicatorRenderer {
                             AnimalEntity animal, ItemStack stack, boolean highlighted) {
         ItemRenderer itemRenderer = client.getItemRenderer();
         int light = highlighted ? LightmapTextureManager.MAX_LIGHT_COORDINATE : getPackedLight(animal);
-        ModelTransformationMode mode = config.use3DModels ? ModelTransformationMode.GROUND : ModelTransformationMode.GUI;
-        itemRenderer.renderItem(stack, mode, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, client.world, 0);
+        itemRenderer.renderItem(stack, ModelTransformationMode.GUI, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, client.world, 0);
     }
 
     private int getPackedLight(AnimalEntity animal) {

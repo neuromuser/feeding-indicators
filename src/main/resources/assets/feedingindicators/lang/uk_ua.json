@@ -1,0 +1,21 @@
+{
+  "text.autoconfig.feedingindicators.title": "Налаштування Feeding Indicators",
+
+  "text.autoconfig.feedingindicators.option.detectionRadius": "Радіус виявлення",
+  "text.autoconfig.feedingindicators.option.detectionRadius.@Tooltip": "Максимальна відстань (у блоках) для пошуку тварин та відображення індикаторів.",
+
+  "text.autoconfig.feedingindicators.option.enableHeldItemIndicators": "Індикатори для предмета в руках",
+  "text.autoconfig.feedingindicators.option.enableHeldItemIndicators.@Tooltip": "Завжди показувати індикатори над тваринами поруч, яким подобається предмет у ваших руках.",
+
+  "text.autoconfig.feedingindicators.option.enableLookingIndicators": "Індикатори при погляді",
+  "text.autoconfig.feedingindicators.option.enableLookingIndicators.@Tooltip": "Показувати індикатор над твариною, коли ви дивитеся прямо на неї (працює при присіданні).",
+
+  "text.autoconfig.feedingindicators.option.cycleDurationTicks": "Швидкість анімації циклу",
+  "text.autoconfig.feedingindicators.option.cycleDurationTicks.@Tooltip": "Тривалість одного циклу анімації предметів (у тіках).",
+
+  "text.autoconfig.feedingindicators.option.indicatorHeight": "Вертикальне зміщення",
+  "text.autoconfig.feedingindicators.option.indicatorHeight.@Tooltip": "Висота, на якій індикатор буде ширяти над головою тварини.",
+
+  "text.autoconfig.feedingindicators.option.indicatorScale": "Масштаб індикатора",
+  "text.autoconfig.feedingindicators.option.indicatorScale.@Tooltip": "Розмір відображуваного індикатора."
+}

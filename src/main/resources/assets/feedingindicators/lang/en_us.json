@@ -17,8 +17,5 @@
   "text.autoconfig.feedingindicators.option.indicatorHeight.@Tooltip": "How high above the animal's head the indicator should float.",
 
   "text.autoconfig.feedingindicators.option.indicatorScale": "Indicator Scale",
-  "text.autoconfig.feedingindicators.option.indicatorScale.@Tooltip": "The size of the rendered indicator.",
-
-  "text.autoconfig.feedingindicators.option.use3DModels": "Use 3D Models",
-  "text.autoconfig.feedingindicators.option.use3DModels.@Tooltip": "If enabled, renders indicators as 3D items instead of flat 2D sprites."
+  "text.autoconfig.feedingindicators.option.indicatorScale.@Tooltip": "The size of the rendered indicator."
 }

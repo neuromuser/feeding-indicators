@@ -26,7 +26,4 @@ public class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip
     public float indicatorScale = 0.5f;
-
-    @ConfigEntry.Gui.Tooltip
-    public boolean use3DModels = false;
 }
