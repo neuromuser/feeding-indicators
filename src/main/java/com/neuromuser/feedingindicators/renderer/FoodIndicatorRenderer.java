@@ -32,12 +32,13 @@ public class FoodIndicatorRenderer {
 
         MatrixStack matrices = context.matrixStack();
         Vec3d cameraPos = context.camera().getPos();
-        float tickDelta = context.tickDelta();
+        float tickDelta = context.tickCounter().getTickDelta(true);
 
         double renderX = (animal.prevX + (animal.getX() - animal.prevX) * tickDelta) - cameraPos.x;
         double renderY = (animal.prevY + (animal.getY() - animal.prevY) * tickDelta) - cameraPos.y + animal.getHeight() + config.indicatorHeight;
         double renderZ = (animal.prevZ + (animal.getZ() - animal.prevZ) * tickDelta) - cameraPos.z;
 
+        assert matrices != null;
         matrices.push();
         matrices.translate(renderX, renderY, renderZ);
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-context.camera().getYaw()));

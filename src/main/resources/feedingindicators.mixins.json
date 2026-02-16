@@ -6,7 +6,8 @@
 
   ],
   "client": [
-    "AnimalEntityMixin"
+    "AnimalEntityMixin",
+    "PassiveEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
