@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "feedingindicators",
+  "version": "${version}",
+  "name": "Feeding Indicators",
+  "description": "A Fabric mod",
+  "authors": [
+    "Neuromuser"
+  ],
+  "contact": {
+    "sources": "https://github.com/neuromuser/feedingindicators"
+  },
+  "license": "MIT",
+  "icon": "assets/feedingindicators/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.neuromuser.feedingindicators.FeedingIndicatorsClient"
+    ],
+    "modmenu": [
+      "com.neuromuser.feedingindicators.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "feedingindicators.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "1.20.1",
+    "java": ">=17",
+    "fabric-api": "*",
+    "cloth-config": ">=11.0.0"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

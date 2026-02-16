@@ -1,0 +1,24 @@
+{
+  "text.autoconfig.feedingindicators.title": "Feeding Indicators Config",
+
+  "text.autoconfig.feedingindicators.option.detectionRadius": "Detection Radius",
+  "text.autoconfig.feedingindicators.option.detectionRadius.@Tooltip": "The maximum distance (in blocks) to search for animals to display indicators.",
+
+  "text.autoconfig.feedingindicators.option.enableHeldItemIndicators": "Show Indicators for Held Item",
+  "text.autoconfig.feedingindicators.option.enableHeldItemIndicators.@Tooltip": "Always show indicators for all animals nearby that like the item you are currently holding.",
+
+  "text.autoconfig.feedingindicators.option.enableLookingIndicators": "Show Indicators when Looking",
+  "text.autoconfig.feedingindicators.option.enableLookingIndicators.@Tooltip": "Show the indicator for an animal when you look directly at it, even if not holding food.",
+
+  "text.autoconfig.feedingindicators.option.cycleDurationTicks": "Cycle Animation Speed",
+  "text.autoconfig.feedingindicators.option.cycleDurationTicks.@Tooltip": "How many ticks it takes for the floating animation to complete one cycle.",
+
+  "text.autoconfig.feedingindicators.option.indicatorHeight": "Indicator Vertical Offset",
+  "text.autoconfig.feedingindicators.option.indicatorHeight.@Tooltip": "How high above the animal's head the indicator should float.",
+
+  "text.autoconfig.feedingindicators.option.indicatorScale": "Indicator Scale",
+  "text.autoconfig.feedingindicators.option.indicatorScale.@Tooltip": "The size of the rendered indicator.",
+
+  "text.autoconfig.feedingindicators.option.use3DModels": "Use 3D Models",
+  "text.autoconfig.feedingindicators.option.use3DModels.@Tooltip": "If enabled, renders indicators as 3D items instead of flat 2D sprites."
+}
