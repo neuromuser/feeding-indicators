@@ -21,7 +21,7 @@ public abstract class AnimalEntityMixin extends PassiveEntity {
     @Shadow public abstract boolean isInLove();
 
     @Unique
-    private static final TrackedData<Integer> BREEDING_AGE_SYNCED = DataTracker.registerData(AnimalEntityMixin.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> BREEDING_AGE_SYNCED = DataTracker.registerData(AnimalEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     protected AnimalEntityMixin(EntityType<? extends PassiveEntity> entityType, World world) {
         super(entityType, world);

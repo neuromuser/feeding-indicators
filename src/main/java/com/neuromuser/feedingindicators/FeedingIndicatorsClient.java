@@ -9,15 +9,19 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.Box;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FeedingIndicatorsClient implements ClientModInitializer {
 
@@ -26,6 +30,9 @@ public class FeedingIndicatorsClient implements ClientModInitializer {
     private FoodIndicatorRenderer renderer;
     private Entity lastLookedAtAnimal = null;
 
+    private final Map<Integer, Long> recentlyFedAnimals = new HashMap<>();
+    private static final long HIDE_DURATION_TICKS = 600; //love mode duration!
+
     @Override
     public void onInitializeClient() {
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
@@ -33,6 +40,13 @@ public class FeedingIndicatorsClient implements ClientModInitializer {
 
         foodCache = new AnimalFoodCache();
         renderer = new FoodIndicatorRenderer();
+
+        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            if (world.isClient && entity instanceof AnimalEntity animal && canBeFed(animal, player.getStackInHand(hand))) {
+                recentlyFedAnimals.put(entity.getId(), world.getTime());
+            }
+            return ActionResult.PASS;
+        });
 
         WorldRenderEvents.AFTER_ENTITIES.register(context -> {
             MinecraftClient client = MinecraftClient.getInstance();
@@ -44,10 +58,21 @@ public class FeedingIndicatorsClient implements ClientModInitializer {
         });
     }
 
+    private boolean isRecentlyFed(AnimalEntity animal, long worldTime) {
+        Long fedTime = recentlyFedAnimals.get(animal.getId());
+        if (fedTime == null) return false;
+        if (worldTime - fedTime > HIDE_DURATION_TICKS) {
+            recentlyFedAnimals.remove(animal.getId());
+            return false;
+        }
+        return true;
+    }
+
     private void renderHeldItemIndicators(WorldRenderContext context, ClientPlayerEntity player) {
         ItemStack heldItem = getRelevantHeldItem(player);
         if (heldItem.isEmpty()) return;
 
+        long worldTime = player.getWorld().getTime();
         double radiusSquared = (double) config.detectionRadius * config.detectionRadius;
         Box searchBox = Box.of(player.getPos(),
                 config.detectionRadius * 2,
@@ -60,6 +85,7 @@ public class FeedingIndicatorsClient implements ClientModInitializer {
 
         for (AnimalEntity animal : nearbyAnimals) {
             if (animal == lastLookedAtAnimal) continue;
+            if (isRecentlyFed(animal, worldTime)) continue;
             if (canBeFed(animal, heldItem)) {
                 renderer.renderFoodIndicator(context, animal, heldItem, true, false);
             }
@@ -73,7 +99,7 @@ public class FeedingIndicatorsClient implements ClientModInitializer {
         }
 
         Entity targetEntity = RaycastHelper.getTargetedEntity(
-                player, config.detectionRadius,
+                player, 4,
                 entity -> entity instanceof AnimalEntity);
 
         if (!(targetEntity instanceof AnimalEntity animal)) {
@@ -82,6 +108,9 @@ public class FeedingIndicatorsClient implements ClientModInitializer {
         }
 
         lastLookedAtAnimal = animal;
+
+        long worldTime = player.getWorld().getTime();
+        if (isRecentlyFed(animal, worldTime)) return;
 
         List<ItemStack> foodTypes;
 
@@ -93,7 +122,6 @@ public class FeedingIndicatorsClient implements ClientModInitializer {
 
         if (foodTypes.isEmpty()) return;
 
-        long worldTime = player.getWorld().getTime();
         int cycleIndex = (int) ((worldTime / config.cycleDurationTicks) % foodTypes.size());
         renderer.renderFoodIndicator(context, animal, foodTypes.get(cycleIndex), true, true);
     }
